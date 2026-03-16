@@ -1,31 +1,30 @@
 # LaJuveFG-Website
 
-Sitio web oficial de La JuveFG, una iniciativa juvenil enfocada en formar, conectar y movilizar jóvenes como agentes de cambio en sus comunidades.
+Official website of La JuveFG, a youth initiative focused on forming, connecting, and mobilizing young people as agents of change in their communities.
 
-La plataforma permite:
+The platform allows:
 
-Presentar la organización y sus iniciativas.
+Presenting the organization and its initiatives.
 
-Mostrar actividades y eventos comunitarios.
+Showcasing community activities and events.
 
-Permitir que jóvenes se registren como voluntarios.
+Allowing young people to register as volunteers.
 
-Guardar automáticamente registros en Google Sheets.
+Automatically saving registrations in Google Sheets.
 
-Enviar correos de confirmación automáticos a los inscritos.
+Sending automatic confirmation emails to registered users.
 
-El proyecto está construido con Next.js, TailwindCSS, y un backend serverless basado en Google Apps Script.
+The project is built using Next.js, TailwindCSS, and a serverless backend powered by Google Apps Script.
 
-Sitio en producción
+Live Website
 
-El sitio está desplegado en:
+The website is deployed at:
 
 https://lajuvefg.vercel.app
 
-Deployment manejado mediante Vercel conectado a GitHub.
+Deployment is managed through Vercel, connected to GitHub.
 
-Tecnologías utilizadas
-
+Technologies Used
 Frontend
 
 Next.js
@@ -42,13 +41,13 @@ Google Apps Script
 
 Google Sheets
 
-Infraestructura
+Infrastructure
 
 Vercel (hosting)
 
-GitHub (versionado)
+GitHub (version control)
 
-📂 Estructura del proyecto
+Project Structure
 juvefg-site
 │
 ├── components
@@ -78,52 +77,52 @@ juvefg-site
 ├── tailwind.config.js
 ├── tsconfig.json
 └── package.json
-⚙️ Instalación local
-1. Clonar repositorio
+Local Installation
+Clone the repository
 git clone https://github.com/fckyeslol/La-JuveFG---Website.git
 cd La-JuveFG---Website
-2. Instalar dependencias
+Install dependencies
 npm install
-3. Crear variables de entorno
+Create environment variables
 
-Crear archivo:
+Create a file:
 
 .env.local
 
-y agregar:
+Add the following:
 
 NEXT_PUBLIC_GOOGLE_SCRIPT_URL=YOUR_GOOGLE_APPS_SCRIPT_URL
-4. Ejecutar proyecto
+Run the project
 npm run dev
 
-Abrir en navegador:
+Open in your browser:
 
 http://localhost:3000
-Sistema de registro de voluntarios
+Volunteer Registration System
 
-El formulario de inscripción se encuentra en:
+The volunteer registration form is located at:
 
 /inscripcion
 
-Cuando un usuario envía el formulario:
+When a user submits the form:
 
-El frontend envía los datos mediante fetch().
+The frontend sends the data using fetch().
 
-La solicitud se envía a un Google Apps Script Web App.
+The request is sent to a Google Apps Script Web App.
 
 Apps Script:
 
-Guarda los datos en Google Sheets.
+Saves the data in Google Sheets.
 
-Envía correo de confirmación al voluntario.
+Sends a confirmation email to the volunteer.
 
-Envía notificación al equipo organizador.
+Sends a notification email to the organization team.
 
- Arquitectura del flujo
-Usuario
+System Architecture
+User
    │
    ▼
-Formulario React
+React Form
    │
    ▼
 fetch() request
@@ -131,82 +130,95 @@ fetch() request
    ▼
 Google Apps Script (Web App)
    │
-   ├── Guarda datos en Google Sheets
+   ├── Saves data in Google Sheets
    │
-   └── Envía correos automáticos
-Base de datos
+   └── Sends automatic emails
+Database
 
-La base de datos está alojada en Google Sheets.
+The database is hosted in Google Sheets.
 
-Columnas utilizadas:
+Columns used:
 
-Nombre
-Correo
-Teléfono
-Edad
-Ciudad
-Barrio
-Ocupación
-Nivel educativo
-Área de interés
-Experiencia
-Disponibilidad
-Motivación
-Fecha de registro
-Correos automáticos
+Name
 
-Apps Script envía dos correos:
+Email
 
-1. Confirmación al voluntario
+Phone
 
-Incluye:
+Age
 
-agradecimiento
+City
 
-confirmación de registro
+Neighborhood
 
-información de contacto
+Occupation
 
-2. Notificación al equipo
+Education level
 
-Notifica que hay un nuevo registro.
+Area of interest
 
-Deploy en Vercel
+Experience
 
-El sitio se despliega automáticamente desde GitHub.
+Availability
 
-Cada push a main genera un nuevo deployment.
+Motivation
 
-Deploy manual
+Registration date
 
-Ir a Vercel
+Automatic Emails
 
-New Project
+Apps Script sends two emails.
+
+1. Confirmation email to the volunteer
+
+Includes:
+
+Thank you message
+
+Registration confirmation
+
+Contact information
+
+2. Notification to the organization team
+
+Notifies that a new volunteer registration has been submitted.
+
+Deployment on Vercel
+
+The website is automatically deployed from GitHub.
+
+Each push to main triggers a new deployment.
+
+Manual deployment process
+
+Go to Vercel
+
+Click New Project
 
 Import Git Repository
 
-Seleccionar repo
+Select the repository
 
-Agregar variables de entorno
+Add environment variables
 
-Variables de entorno
+Environment Variables
 
-En Vercel se debe configurar:
+In Vercel, configure:
 
 NEXT_PUBLIC_GOOGLE_SCRIPT_URL
 
-Ejemplo:
+Example:
 
 NEXT_PUBLIC_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/AKfycb.../exec
 
-Ubicación en Vercel:
+Location in Vercel:
 
 Project Settings → Environment Variables
-Google Apps Script
+Google Apps Script Configuration
 
-El Apps Script debe estar desplegado como Web App.
+The Apps Script must be deployed as a Web App.
 
-Configuración correcta:
+Correct configuration:
 
 Execute as:
 
@@ -216,70 +228,89 @@ Who has access:
 
 Anyone
 
-URL final del script:
+Final script URL format:
 
 https://script.google.com/macros/s/.../exec
 
-Esta URL se usa en la variable de entorno.
+This URL is used in the environment variable.
 
-Sistema de videos
+Video System
 
-El sitio incluye videos verticales tipo reels.
+The website includes vertical reel-style videos.
 
-Ubicación:
+Location:
 
 /public/images
 
-Se muestran mediante el componente:
+Displayed using the component:
 
 VideoCard
 
-Características:
+Features:
 
-autoplay
+Autoplay
 
-controles personalizados
+Custom controls
 
-optimización responsive
+Responsive optimization
 
-Diseño
+Design
 
-El diseño está construido con TailwindCSS y un sistema de variables CSS.
+The design is built with TailwindCSS and a CSS variable system.
 
-Colores principales de La JuveFG:
+Main La JuveFG colors:
 
 Primary
+
 #163d73
 
 Accent
+
 #ff7a59
 
 Background
+
 #ffffff
-📱 Responsive
+Responsive Design
 
-El sitio está optimizado para:
+The site is optimized for:
 
-móviles
+Mobile
 
-tablets
+Tablet
 
-desktop
+Desktop
 
-Layout principal usa:
+The main layout uses:
 
 CSS Grid
+
 Flexbox
-Mejoras futuras
 
-Equipo
+Future Improvements
 
-Proyecto desarrollado para:
+Possible future improvements:
+
+Admin dashboard
+
+Volunteer map
+
+Impact metrics dashboard
+
+Authentication for organizers
+
+Event CMS
+
+Social impact analytics
+
+Team
+
+Project developed for:
 
 La JuveFG
 
-Iniciativa juvenil enfocada en liderazgo, servicio social, cultura y desarrollo comunitario.
+A youth initiative focused on leadership, social service, culture, and community development.
 
-Licencia
+License
 
-Este proyecto es de uso institucional para La JuveFG.
+This project is intended for institutional use by La JuveFG.
