@@ -1,316 +1,55 @@
 # LaJuveFG-Website
 
-Official website of La JuveFG, a youth initiative focused on forming, connecting, and mobilizing young people as agents of change in their communities.
+This is a website I built for La JuveFG, a youth project focused on helping young people get involved and actually do stuff in their communities.
 
-The platform allows:
+👉 https://lajuvefg.vercel.app
 
-Presenting the organization and its initiatives.
+What it does
+Shows what La JuveFG is about
+Displays events and activities
+Lets people sign up as volunteers
+Saves the data in Google Sheets
+Sends confirmation emails automatically
+Tech I used
 
-Showcasing community activities and events.
-
-Allowing young people to register as volunteers.
-
-Automatically saving registrations in Google Sheets.
-
-Sending automatic confirmation emails to registered users.
-
-The project is built using Next.js, TailwindCSS, and a serverless backend powered by Google Apps Script.
-
-Live Website
-
-The website is deployed at:
-
-https://lajuvefg.vercel.app
-
-Deployment is managed through Vercel, connected to GitHub.
-
-Technologies Used
 Frontend
 
 Next.js
-
 React
-
 TailwindCSS
 
-TypeScript
-
-Backend
+Backend (kinda serverless magic)
 
 Google Apps Script
-
 Google Sheets
 
-Infrastructure
+Other
 
 Vercel (hosting)
+GitHub
+How it works (simple version)
 
-GitHub (version control)
+User fills form → frontend sends data → Google Apps Script handles it →
 
-Project Structure
-juvefg-site
-│
-├── components
-│   ├── Navbar.tsx
-│   ├── Footer.tsx
-│   ├── VideoCard.tsx
-│   └── VolunteerForm.tsx
-│
-├── pages
-│   ├── index.tsx
-│   ├── inscripcion.tsx
-│   └── _app.tsx
-│
-├── public
-│   ├── images
-│   │   ├── hero.mp4
-│   │   ├── interact.mp4
-│   │   ├── campeones.mp4
-│   │   └── navidad.mp4
-│   │
-│   └── juve.png
-│
-├── styles
-│   └── globals.css
-│
-├── next.config.js
-├── tailwind.config.js
-├── tsconfig.json
-└── package.json
-Local Installation
-Clone the repository
+saves it in Sheets
+sends emails
+Run it locally
 git clone https://github.com/fckyeslol/La-JuveFG---Website.git
 cd La-JuveFG---Website
-Install dependencies
 npm install
-Create environment variables
 
-Create a file:
+Create a .env.local:
 
-.env.local
+NEXT_PUBLIC_GOOGLE_SCRIPT_URL=your_script_url
 
-Add the following:
+Then:
 
-NEXT_PUBLIC_GOOGLE_SCRIPT_URL=YOUR_GOOGLE_APPS_SCRIPT_URL
-Run the project
 npm run dev
-
-Open in your browser:
-
-http://localhost:3000
-Volunteer Registration System
-
-The volunteer registration form is located at:
-
-/inscripcion
-
-When a user submits the form:
-
-The frontend sends the data using fetch().
-
-The request is sent to a Google Apps Script Web App.
-
-Apps Script:
-
-Saves the data in Google Sheets.
-
-Sends a confirmation email to the volunteer.
-
-Sends a notification email to the organization team.
-
-System Architecture
-User
-   │
-   ▼
-React Form
-   │
-   ▼
-fetch() request
-   │
-   ▼
-Google Apps Script (Web App)
-   │
-   ├── Saves data in Google Sheets
-   │
-   └── Sends automatic emails
-Database
-
-The database is hosted in Google Sheets.
-
-Columns used:
-
-Name
-
-Email
-
-Phone
-
-Age
-
-City
-
-Neighborhood
-
-Occupation
-
-Education level
-
-Area of interest
-
-Experience
-
-Availability
-
-Motivation
-
-Registration date
-
-Automatic Emails
-
-Apps Script sends two emails.
-
-1. Confirmation email to the volunteer
-
-Includes:
-
-Thank you message
-
-Registration confirmation
-
-Contact information
-
-2. Notification to the organization team
-
-Notifies that a new volunteer registration has been submitted.
-
-Deployment on Vercel
-
-The website is automatically deployed from GitHub.
-
-Each push to main triggers a new deployment.
-
-Manual deployment process
-
-Go to Vercel
-
-Click New Project
-
-Import Git Repository
-
-Select the repository
-
-Add environment variables
-
-Environment Variables
-
-In Vercel, configure:
-
-NEXT_PUBLIC_GOOGLE_SCRIPT_URL
-
-Example:
-
-NEXT_PUBLIC_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/AKfycb.../exec
-
-Location in Vercel:
-
-Project Settings → Environment Variables
-Google Apps Script Configuration
-
-The Apps Script must be deployed as a Web App.
-
-Correct configuration:
-
-Execute as:
-
-Me
-
-Who has access:
-
-Anyone
-
-Final script URL format:
-
-https://script.google.com/macros/s/.../exec
-
-This URL is used in the environment variable.
-
-Video System
-
-The website includes vertical reel-style videos.
-
-Location:
-
-/public/images
-
-Displayed using the component:
-
-VideoCard
-
-Features:
-
-Autoplay
-
-Custom controls
-
-Responsive optimization
-
-Design
-
-The design is built with TailwindCSS and a CSS variable system.
-
-Main La JuveFG colors:
-
-Primary
-
-#163d73
-
-Accent
-
-#ff7a59
-
-Background
-
-#ffffff
-Responsive Design
-
-The site is optimized for:
-
-Mobile
-
-Tablet
-
-Desktop
-
-The main layout uses:
-
-CSS Grid
-
-Flexbox
-
-Future Improvements
-
-Possible future improvements:
-
-Admin dashboard
-
+Notes
+The “database” is literally Google Sheets
+Emails are handled by Apps Script
+Deploy is automatic with Vercel
+Future ideas
+Admin panel
 Volunteer map
-
-Impact metrics dashboard
-
-Authentication for organizers
-
-Event CMS
-
-Social impact analytics
-
-Team
-
-Project developed for:
-
-La JuveFG
-
-A youth initiative focused on leadership, social service, culture, and community development.
-
-License
-
-This project is intended for institutional use by La JuveFG.
+Stats dashboard
