@@ -8,6 +8,14 @@
  * J Nivel educativo, K Área interés, L Experiencia vol., M (vacía), N Detalle exp., O (vacía),
  * P Disponibilidad, Q Motivación, R Fecha registro
  */
+
+/** Abrir la URL en el navegador hace GET; sin esto Google muestra "doGet not found". */
+function doGet() {
+  return ContentService.createTextOutput(
+    'La JuveFG — Web app activa. Los registros llegan por POST desde el formulario; esta URL no se usa en el navegador.'
+  ).setMimeType(ContentService.MimeType.TEXT);
+}
+
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
