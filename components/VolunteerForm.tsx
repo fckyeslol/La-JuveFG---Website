@@ -6,6 +6,8 @@ interface VolunteerData {
   nombre: string;
   correo: string;
   telefono: string;
+  documentoTipo: string;
+  documentoNumero: string;
   edad: string;
   municipio: string;
   barrio: string;
@@ -24,6 +26,8 @@ export default function VolunteerForm() {
     nombre: '',
     correo: '',
     telefono: '',
+    documentoTipo: '',
+    documentoNumero: '',
     edad: '',
     municipio: '',
     barrio: '',
@@ -58,6 +62,8 @@ export default function VolunteerForm() {
       'nombre',
       'correo',
       'telefono',
+      'documentoTipo',
+      'documentoNumero',
       'edad',
       'municipio',
       'barrio',
@@ -114,6 +120,8 @@ export default function VolunteerForm() {
         nombre: '',
         correo: '',
         telefono: '',
+        documentoTipo: '',
+        documentoNumero: '',
         edad: '',
         municipio: '',
         barrio: '',
@@ -144,7 +152,9 @@ export default function VolunteerForm() {
 
         <p className="mt-3 text-[#4f6279] max-w-2xl leading-7">
           Queremos conocerte. Este registro nos ayudará a vincularte a actividades,
-          procesos de formación y acciones comunitarias de alto impacto.
+          procesos de formación y acciones comunitarias de alto impacto. Debes completar
+          con el número de tu <strong>tarjeta de identidad</strong> o de tu{' '}
+          <strong>cédula de ciudadanía</strong>.
         </p>
       </div>
 
@@ -169,6 +179,28 @@ export default function VolunteerForm() {
         <div>
           <label className="label">Número de teléfono *</label>
           <input className="input" name="telefono" value={form.telefono} onChange={handleChange} />
+        </div>
+
+        <div>
+          <label className="label">Documento *</label>
+          <select className="select" name="documentoTipo" value={form.documentoTipo} onChange={handleChange}>
+            <option value="">Selecciona</option>
+            <option value="Tarjeta de identidad">Tarjeta de identidad</option>
+            <option value="Cédula de ciudadanía">Cédula de ciudadanía</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="label">Número de documento *</label>
+          <input
+            className="input"
+            name="documentoNumero"
+            value={form.documentoNumero}
+            onChange={handleChange}
+            inputMode="numeric"
+            autoComplete="off"
+            placeholder="Sin puntos ni espacios"
+          />
         </div>
 
         <div>

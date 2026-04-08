@@ -31,6 +31,12 @@ export default function Inscripcion() {
                 formación en liderazgo y procesos que conectan a jóvenes con propósito.
               </p>
 
+              <p className="mt-4 text-[#4f6279] text-sm leading-7 border-l-4 border-[#163d73] pl-4">
+                Para la inscripción necesitarás indicar el número de{' '}
+                <strong>tarjeta de identidad</strong> o de <strong>cédula de ciudadanía</strong>{' '}
+                (según corresponda a tu edad).
+              </p>
+
               <div className="mt-8 space-y-4">
                 <div className="benefit-card">
                   <p>Desarrollo de liderazgo, organización y trabajo en equipo.</p>
