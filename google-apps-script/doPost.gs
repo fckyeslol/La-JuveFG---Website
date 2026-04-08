@@ -1,35 +1,39 @@
 /**
- * Web app (POST). Columnas alineadas con la hoja:
- * Nombre, Correo, Teléfono, Tipo doc, Nº doc, Edad, Municipio, Barrio, Ocupación,
- * Nivel educativo, Área interés, Experiencia vol., [vacía], Detalle exp., [vacía],
- * Disponibilidad, Motivación, Fecha registro
+ * Web app (POST). Cuerpo: JSON (desde el sitio con Content-Type text/plain por no-cors).
  *
- * El sitio envía: documentoTipo, documentoNumero (camelCase).
+ * Columnas A–R:
+ * Nombre, Correo, Teléfono, Tipo doc, Nº doc, Edad, Municipio, Barrio, Ocupación,
+ * Nivel educativo, Área interés, Experiencia vol., [vacía M], Detalle [N], [vacía O],
+ * Disponibilidad, Motivación, Fecha registro
  */
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = JSON.parse(e.postData.contents);
+    var raw = e.postData && e.postData.contents ? e.postData.contents : '{}';
+    var data = JSON.parse(raw);
+
+    var docTipo = cell_(data.documentoTipo || data.tipodedocumento);
+    var docNum = cell_(data.documentoNumero || data.numerodedocumento);
 
     sheet.appendRow([
-      data.nombre,
-      data.correo,
-      data.telefono,
-      data.documentoTipo,
-      data.documentoNumero,
-      data.edad,
-      data.municipio,
-      data.barrio,
-      data.ocupacion,
-      data.nivelEducativo,
-      data.areaInteres,
-      data.experiencia,
+      cell_(data.nombre),
+      cell_(data.correo),
+      cell_(data.telefono),
+      docTipo,
+      docNum,
+      cell_(data.edad),
+      cell_(data.municipio),
+      cell_(data.barrio),
+      cell_(data.ocupacion),
+      cell_(data.nivelEducativo),
+      cell_(data.areaInteres),
+      cell_(data.experiencia),
       '',
-      data.experienciaDetalle || '',
+      cell_(data.experienciaDetalle),
       '',
-      data.disponibilidad,
-      data.motivacion,
-      data.fechaRegistro
+      cell_(data.disponibilidad),
+      cell_(data.motivacion),
+      cell_(data.fechaRegistro)
     ]);
 
     MailApp.sendEmail({
@@ -40,7 +44,7 @@ function doPost(e) {
         "<p><strong>Nombre:</strong> " + escapeHtml_(data.nombre) + "</p>" +
         "<p><strong>Correo:</strong> " + escapeHtml_(data.correo) + "</p>" +
         "<p><strong>Teléfono:</strong> " + escapeHtml_(data.telefono) + "</p>" +
-        "<p><strong>Documento:</strong> " + escapeHtml_(data.documentoTipo) + " — " + escapeHtml_(String(data.documentoNumero || "")) + "</p>" +
+        "<p><strong>Documento:</strong> " + escapeHtml_(docTipo) + " — " + escapeHtml_(docNum) + "</p>" +
         "<p><strong>Municipio:</strong> " + escapeHtml_(data.municipio) + "</p>" +
         "<p><strong>Área de interés:</strong> " + escapeHtml_(data.areaInteres) + "</p>" +
         "<p><strong>Motivación:</strong> " + escapeHtml_(data.motivacion) + "</p>"
@@ -72,7 +76,11 @@ function doPost(e) {
   }
 }
 
-/** Evita HTML roto si el nombre u otros campos traen &lt; &gt; */
+function cell_(v) {
+  if (v === null || v === undefined) return "";
+  return String(v);
+}
+
 function escapeHtml_(text) {
   if (text === null || text === undefined) return "";
   return String(text)

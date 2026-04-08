@@ -98,21 +98,23 @@ export default function VolunteerForm() {
     setSuccess(false);
 
     try {
+      const { aceptaDatos: _a, ...rest } = form;
       const payload = {
-        ...form,
+        ...rest,
         experiencia: form.experiencia === 'Si' ? 'Sí' : 'No',
         fechaRegistro: new Date().toISOString(),
       };
 
       const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL || '';
 
+      // no-cors solo permite Content-Type "simple"; application/json a veces se pierde.
       await fetch(scriptURL, {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'text/plain;charset=utf-8',
         },
         body: JSON.stringify(payload),
-        mode: 'no-cors',
       });
 
       setSuccess(true);
