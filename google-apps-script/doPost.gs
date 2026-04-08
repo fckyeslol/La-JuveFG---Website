@@ -1,20 +1,22 @@
 /**
- * Web app (POST). Cuerpo: JSON (desde el sitio con Content-Type text/plain por no-cors).
+ * Web app (POST).
+ * El sitio envía: application/x-www-form-urlencoded con campo "payload" = JSON string.
+ * (Compatible con fetch no-cors.) También acepta cuerpo JSON/texto plano por si acaso.
  *
  * Columnas A–R:
- * Nombre, Correo, Teléfono, Tipo doc, Nº doc, Edad, Municipio, Barrio, Ocupación,
- * Nivel educativo, Área interés, Experiencia vol., [vacía M], Detalle [N], [vacía O],
- * Disponibilidad, Motivación, Fecha registro
+ * A Nombre, B Correo, C Teléfono, D Tipo doc, E Nº doc, F Edad, G Municipio, H Barrio, I Ocupación,
+ * J Nivel educativo, K Área interés, L Experiencia vol., M (vacía), N Detalle exp., O (vacía),
+ * P Disponibilidad, Q Motivación, R Fecha registro
  */
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var raw = e.postData && e.postData.contents ? e.postData.contents : '{}';
-    var data = JSON.parse(raw);
+    var data = parsePayload_(e);
 
     var docTipo = cell_(data.documentoTipo || data.tipodedocumento);
     var docNum = cell_(data.documentoNumero || data.numerodedocumento);
 
+    // Exactamente 18 celdas → columnas A–R
     sheet.appendRow([
       cell_(data.nombre),
       cell_(data.correo),
@@ -74,6 +76,22 @@ function doPost(e) {
       })
     ).setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+/**
+ * Prioridad: formulario urlencoded (payload=). Respaldo: postData.contents JSON.
+ */
+function parsePayload_(e) {
+  var raw = '';
+  if (e.parameter && e.parameter.payload) {
+    raw = String(e.parameter.payload);
+  } else if (e.postData && e.postData.contents) {
+    raw = String(e.postData.contents);
+  }
+  if (!raw || raw === '') {
+    raw = '{}';
+  }
+  return JSON.parse(raw);
 }
 
 function cell_(v) {

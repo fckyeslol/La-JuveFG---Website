@@ -107,14 +107,18 @@ export default function VolunteerForm() {
 
       const scriptURL = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL || '';
 
-      // no-cors solo permite Content-Type "simple"; application/json a veces se pierde.
+      // no-cors: usar x-www-form-urlencoded (válido como “simple”) para que el body
+      // llegue completo a Apps Script; JSON en texto plano a veces se trunca o malinterpreta.
+      const body = new URLSearchParams();
+      body.set('payload', JSON.stringify(payload));
+
       await fetch(scriptURL, {
         method: 'POST',
         mode: 'no-cors',
         headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
         },
-        body: JSON.stringify(payload),
+        body: body.toString(),
       });
 
       setSuccess(true);
